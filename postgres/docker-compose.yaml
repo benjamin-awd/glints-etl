@@ -1,0 +1,30 @@
+version: "3.7"
+
+services:
+  # This service runs the source database
+  source_postgresql:
+    image: postgres:13
+    container_name: source_db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: source_postgres
+      POSTGRES_PASSWORD: source_postgres
+      POSTGRES_DB: sales
+
+  # This service runs the target database
+  target_postgres:
+    image: postgres:13
+    container_name: target_db
+    ports:
+      - 15432:5432
+    environment:
+      POSTGRES_USER: target_postgres
+      POSTGRES_PASSWORD: target_postgres
+      POSTGRES_DB: sales
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
