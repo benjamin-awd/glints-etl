@@ -1,0 +1,6 @@
+__pycache__
+airflow/logs
+airflow/**/*.ipynb
+.env
+*/.venv
+*.ipynb_checkpoints
