@@ -10,7 +10,7 @@ services:
     environment:
       POSTGRES_USER: source_postgres
       POSTGRES_PASSWORD: source_postgres
-      POSTGRES_DB: sales
+      POSTGRES_DB: source_postgres
 
   # This service runs the target database
   target_postgres:
@@ -21,7 +21,7 @@ services:
     environment:
       POSTGRES_USER: target_postgres
       POSTGRES_PASSWORD: target_postgres
-      POSTGRES_DB: sales
+      POSTGRES_DB: target_postgres
 
   adminer:
     image: adminer
