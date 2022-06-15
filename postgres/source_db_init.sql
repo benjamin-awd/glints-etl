@@ -12,7 +12,7 @@ VALUES
     (1, '13-12-21', '2000');
 
 -- Create read-only user for Airflow ETL
-CREATE USER airflow_readonly;
+CREATE USER airflow_readonly WITH PASSWORD 'airflow_readonly';
 GRANT CONNECT ON DATABASE source_postgres TO airflow_readonly;
 GRANT USAGE ON SCHEMA public TO airflow_readonly;
 GRANT SELECT ON sales TO airflow_readonly;

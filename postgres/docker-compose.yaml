@@ -6,29 +6,31 @@ services:
     image: postgres:13
     container_name: source_db
     ports:
-      - 5432:5432
+      - 15432:5432
     environment:
       POSTGRES_USER: source_postgres
       POSTGRES_PASSWORD: source_postgres
       POSTGRES_DB: source_postgres
     volumes:
       - ./source_db_init.sql:/docker-entrypoint-initdb.d/source_db_init.sql
+    networks:
+      - docker_network
 
   # This service runs the target database
   target_postgres:
     image: postgres:13
     container_name: target_db
     ports:
-      - 15432:5432
+      - 25432:5432
     environment:
       POSTGRES_USER: target_postgres
       POSTGRES_PASSWORD: target_postgres
       POSTGRES_DB: target_postgres
     volumes:
       - ./target_db_init.sql:/docker-entrypoint-initdb.d/target_db_init.sql
+    networks:
+      - docker_network
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+networks:
+  docker_network:
+      name: docker_network

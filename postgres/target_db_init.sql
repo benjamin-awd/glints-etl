@@ -6,7 +6,7 @@ sale_value      INT
 );
 
 -- Create read/write user for Airflow ETL
-CREATE USER airflow;
+CREATE USER airflow WITH password 'airflow';
 GRANT CONNECT ON DATABASE target_postgres TO airflow;
 GRANT USAGE ON SCHEMA public TO airflow;
-GRANT SELECT, INSERT, UPDATE ON sales TO airflow;
+GRANT SELECT, INSERT, UPDATE, TRUNCATE ON sales TO airflow;
