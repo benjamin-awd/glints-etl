@@ -70,6 +70,8 @@ x-airflow-common:
       condition: service_healthy
     postgres:
       condition: service_healthy
+  networks:
+  - docker_network
 
 services:
   postgres:
@@ -85,6 +87,8 @@ services:
       interval: 5s
       retries: 5
     restart: always
+    networks:
+      - docker_network
 
   redis:
     image: redis:latest
@@ -96,6 +100,8 @@ services:
       timeout: 30s
       retries: 50
     restart: always
+    networks:
+      - docker_network
 
   airflow-webserver:
     <<: *airflow-common
@@ -112,6 +118,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - docker_network
 
   airflow-scheduler:
     <<: *airflow-common
@@ -126,6 +134,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - docker_network
 
   airflow-worker:
     <<: *airflow-common
@@ -147,6 +157,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - docker_network
 
   airflow-triggerer:
     <<: *airflow-common
@@ -161,6 +173,8 @@ services:
       <<: *airflow-common-depends-on
       airflow-init:
         condition: service_completed_successfully
+    networks:
+      - docker_network
 
   airflow-init:
     <<: *airflow-common
@@ -239,6 +253,8 @@ services:
     user: "0:0"
     volumes:
       - .:/sources
+    networks:
+      - docker_network
 
   airflow-cli:
     <<: *airflow-common
@@ -252,6 +268,13 @@ services:
       - bash
       - -c
       - airflow
+    networks:
+      - docker_network
 
 volumes:
   postgres-db-volume:
+
+networks:
+  docker_network:
+    driver: bridge
+    name: docker_network
