@@ -4,3 +4,4 @@ airflow/**/*.ipynb
 .env
 */.venv
 *.ipynb_checkpoints
+.vscode
