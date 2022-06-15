@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   # This service runs the source database
-  source_postgresql:
+  source_postgres:
     image: postgres:13
     container_name: source_db
     ports:
@@ -11,6 +11,8 @@ services:
       POSTGRES_USER: source_postgres
       POSTGRES_PASSWORD: source_postgres
       POSTGRES_DB: source_postgres
+    volumes:
+      - ./source_db_init.sql:/docker-entrypoint-initdb.d/source_db_init.sql
 
   # This service runs the target database
   target_postgres:
@@ -22,6 +24,8 @@ services:
       POSTGRES_USER: target_postgres
       POSTGRES_PASSWORD: target_postgres
       POSTGRES_DB: target_postgres
+    volumes:
+      - ./target_db_init.sql:/docker-entrypoint-initdb.d/target_db_init.sql
 
   adminer:
     image: adminer
