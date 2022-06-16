@@ -276,5 +276,4 @@ volumes:
 
 networks:
   docker_network:
-    driver: bridge
     name: docker_network
