@@ -4,7 +4,7 @@ services:
   # This service runs the source database
   source_postgres:
     image: postgres:13
-    container_name: source_db
+    container_name: postgres_source_db
     ports:
       - 15432:5432
     environment:
@@ -19,7 +19,7 @@ services:
   # This service runs the target database
   target_postgres:
     image: postgres:13
-    container_name: target_db
+    container_name: postgres_target_db
     ports:
       - 25432:5432
     environment:
