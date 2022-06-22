@@ -1,7 +1,7 @@
 __pycache__
 airflow/logs
 airflow/**/*.ipynb
-airflow/data
+airflow/data/*
 .env
 */.venv
 *.ipynb_checkpoints
